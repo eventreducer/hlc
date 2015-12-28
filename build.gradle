@@ -1,0 +1,77 @@
+buildscript {
+  repositories {
+        jcenter()
+   }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.4"
+}
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+version = "0.1"
+
+publishing {
+	publications {
+		MyPublication(MavenPublication) {
+			from components.java
+			groupId 'org.eventreducer'
+            		artifactId 'eventreducer-hlc'
+            		version version 
+		}
+	}
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['MyPublication']
+    pkg {
+      repo = 'org.eventreducer'
+      name = 'hlc'
+      userOrg = 'eventreducer'
+      licenses = ['Apache-2.0']
+      vcsUrl = 'https://github.com/eventreducer/hlc'
+      version {
+        name = version
+      }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.7'
+
+    // Removes boilerplate code
+    compile 'org.projectlombok:lombok:1.16.6'
+
+    // Useful utilities
+    compile 'com.google.guava:guava:18.0'
+
+    // NTP client & timestamps
+    compile 'commons-net:commons-net:3.4'
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.googlecode.junit-toolbox:junit-toolbox:2.2'
+
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.powermock:powermock:1.6.4'
+    testCompile 'org.powermock:powermock-modules:1.6.4'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.4'
+    testCompile 'org.powermock:powermock-mockito-release-full:1.6.4'
+    testCompile 'org.powermock:powermock-api:1.6.4'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.4'
+    testCompile 'org.powermock:powermock-module-test-mockito-junit4:1.6.4'
+}

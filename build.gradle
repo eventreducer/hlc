@@ -13,7 +13,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-version = "0.1.1"
+version = "0.1.2"
 
 publishing {
 	publications {
@@ -37,7 +37,7 @@ bintray {
       licenses = ['Apache-2.0']
       vcsUrl = 'https://github.com/eventreducer/hlc'
       version {
-        name = version
+        name = project.version
       }
     }
 }

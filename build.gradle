@@ -13,7 +13,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'idea'
 
-version = "0.1"
+version = "0.1.1"
 
 publishing {
 	publications {

@@ -44,9 +44,12 @@ public class HybridTimestamp implements Timestamped {
      * @param time2
      * @return 0 if equal, less than 0 if time1 &lt; time2, more than 0 if time1 &gt; time2
      */
-    private int compare(long time1, long time2) {
+    public static int compare(long time1, long time2) {
         TimeStamp t1 = new TimeStamp(time1);
         TimeStamp t2 = new TimeStamp(time2);
+        return compare(t1, t2);
+    }
+    public static int compare(TimeStamp t1, TimeStamp t2) {
         if (t1.getSeconds() == t2.getSeconds() && t1.getFraction() == t2.getFraction()) {
             return 0;
         }
